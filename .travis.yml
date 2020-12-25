@@ -1,6 +1,4 @@
 sudo: required
 language: python
-before_install:
-  - sudo apt-get install python3.8.1
 script:
   - python3 test/test.py
