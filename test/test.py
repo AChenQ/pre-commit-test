@@ -11,7 +11,7 @@ def add_test(add_a: int, add_b: int) -> int:
     """
     return added number
     """
-    return add_a + add_b
+    return (add_a + add_b) * 2
 
 
 if __name__ == "__main__":
