@@ -1,4 +1,9 @@
 sudo: required
 language: python
+os:
+  - linux
+  - osx
+  - windows
 script:
-  - python3 test/test.py 4 5
+  - python3 -m test.test 4 5
+
