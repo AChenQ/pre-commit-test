@@ -1,4 +1,7 @@
-version: 2
+version: 2.1
+orbs:
+    win: circleci/windows@2.2.0
+
 jobs:
   one:
     docker:
@@ -10,19 +13,17 @@ jobs:
       - checkout
       - run: echo "A first hello"
       - run: sleep 15
-  two: 
-    docker:
-      - image: circleci/ruby:2.4.1
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD
+  windows-test:
+    executor:
+      name: win/default
+      size: "medium" 
+
     steps:
       - checkout
-      - run: echo "A more familiar hi"
-      - run: sleep 15
+      - run: Write-Host 'Hello, Windows'
 workflows:
   version: 2
   one_and_two:
     jobs:
       - one
-      - two
+      - windows-test
