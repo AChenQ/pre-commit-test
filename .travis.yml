@@ -1,3 +1,5 @@
+git:
+  - depth: false
 language: python            
 jobs:
   include:
@@ -5,7 +7,6 @@ jobs:
       python: 3.8           
 install: 
   - pip3 install --upgrade pip 
-  - pip3 install -r requirements.txt
 script: 
   - pre-commit run --all-files
   - python3 test.py || python test.py
