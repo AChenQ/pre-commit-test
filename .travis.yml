@@ -1,9 +1,12 @@
-sudo: required
-language: python
-os:
-  - linux
-  - osx
-  - windows
-script:
-  - python3 -m test.test 4 5
-
+git:
+  - depth: false
+language: python            
+jobs:
+  include:
+    - name: "Python 3.8.0 on Xenial Linux"
+      python: 3.8           
+script: 
+  - pre-commit run --all-files
+cache:
+    directories:
+        - $HOME/.cache/pre-commit

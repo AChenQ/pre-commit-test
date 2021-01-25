@@ -4,7 +4,6 @@
 #
 
 """test"""
-import sys
 
 
 def add_test(add_a: int, add_b: int) -> int:
@@ -15,6 +14,4 @@ def add_test(add_a: int, add_b: int) -> int:
 
 
 if __name__ == "__main__":
-    a = sys.argv[1]
-    b = sys.argv[2]
-    print(add_test(int(a), int(b)))
+    print(add_test(3, 4))
