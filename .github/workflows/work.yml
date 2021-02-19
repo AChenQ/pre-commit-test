@@ -22,3 +22,8 @@ jobs:
         pip install pre-commit
     - name: pre commit
       run: pre-commit run --all-files
+    - name: Commit changes
+      uses: stefanzweifel/git-auto-commit-action@v4.1.2
+      with:
+        commit_message: Apply formatting changes
+        branch: ${{ github.head_ref }}
