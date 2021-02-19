@@ -28,7 +28,7 @@ jobs:
     - name: pre commit
       run: pre-commit run --all-files
 
-    - name: Commit changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: Apply formatting changes
+    #- name: Commit changes
+      #uses: stefanzweifel/git-auto-commit-action@v4
+      #with:
+        #commit_message: Apply formatting changes
