@@ -20,6 +20,7 @@ repos:
     rev: 20.8b1
     hooks:
       - id: black
+        entry: bash -c 'yapf "$@"; git add -u' --
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.8.4
     hooks:
