@@ -6,10 +6,11 @@
 """test"""
 
 
-def add_test(add_a: int, add_b: int) -> int:
+def add_test(add_a:int, add_b:int) -> int:
     """
     return added number
     """
+
     return add_a + add_b
 
 
