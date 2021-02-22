@@ -1,46 +1,63 @@
-#repos:
-  #- repo: local
-    #hooks:
-      #- id: flake8
-        #name: flake8
-        #entry: python -m flake8
-        #args: ['--max-line-length=100', '--ignore=E203,W503']
-        #language: system
-        #types: [python]
-      #- id: mypy
-        #name: mypy 
-        #entry: python -m mypy
-        #args: [--cache-dir=/dev/null]
-        #language: system
-        #types: [python]
-        #additional_dependencies: ['mypy:1.24']
-        #language_version: 3.6.0
 repos:
   - repo: https://github.com/ambv/black
     rev: 20.8b1
     hooks:
       - id: black
-        entry: bash -c 'yapf "$@"; git add -u' --
+        args: [-l 100]
+        files: "(\\.py$)"
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.8.4
     hooks:
       - id: flake8
-        args: ['--max-line-length=100', '--ignore=E203,W503']
+        additional_dependencies: ["flake8-docstrings", "darglint"]
+        args: [
+          "--max-line-length=100", 
+          "--docstring-style=google",
+          "--docstring-convention=google",
+          "--ignore-decorators=overload",
+          "--ignore=E203,W503,D105,D107,DAR203"
+        ]
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.800
     hooks:
       - id: mypy
-        args: [--cache-dir=/dev/null]
+        args: [
+          "--cache-dir=/tmp/mypy_cache/", 
+          "--ignore-missing-imports",
+          "--warn-unreachable",
+          "--strict-equality",             
+          "--strict"
+        ]
+        files: \.(py)$
+        exclude: "(test_\\w*\\.py$)"
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.2.1
     hooks:
       - id: prettier
         types: [python]
+        args: ["--print-width=100", "--tab-width=4"]
+        types: [file]
+        files: "\\.(py|json)$"
   - repo: https://github.com/pre-commit/mirrors-isort
     rev: v5.7.0
     hooks:
       - id: isort
+        args: ["-w 100"]
+        files: "(\\.py$)"
   - repo: https://github.com/pre-commit/mirrors-pylint
     rev: v2.6.0
     hooks:
       - id: pylint
+        args: [
+          "--good-names=i,j,k,x,y,z,w,fp",
+          "--disable=bad-continuation",
+          "--generated-members=torch.*,cv2.*"
+        ]
+        files: "(\\.py$)"
+        exclude: "(test_\\w*\\.py$)"
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.11.0 
+    hooks:
+      - id: markdownlint
+        args: ["--config=./config/markdownlint.json"]
+        files: "(\\.md$)"
